@@ -1,0 +1,40 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ProductSearchTest {
+    public static void main(String[] args) {
+        // Set the path to your ChromeDriver executable
+        System.setProperty("webdriver.chrome.driver", "path_to_chromedriver.exe");
+
+        // Instantiate ChromeDriver
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to the website
+        driver.get("https://automationexercise.com/products");
+
+        // Find the search input field and enter the search keyword
+        WebElement searchInput = driver.findElement(By.name("search"));
+        searchInput.sendKeys("product");
+
+        // Submit the search form
+        searchInput.submit();
+
+        // Wait for the search results page to load (you can use explicit wait if necessary)
+
+        // Find specific elements on the search results page and perform assertions or verifications
+        WebElement searchResultsTitle = driver.findElement(By.xpath("//h1[contains(text(), 'Search Results')]"));
+        String expectedTitle = "Search Results";
+        String actualTitle = searchResultsTitle.getText();
+
+        if (actualTitle.equals(expectedTitle)) {
+            System.out.println("Search Results page is displayed correctly.");
+        } else {
+            System.out.println("Search Results page is not displayed correctly.");
+        }
+
+        // Close the browser
+        driver.quit();
+    }
+}
